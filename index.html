@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function() {
+  var phone = '01028141844';
+  var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var sep = isIOS ? '&' : '?';
+  window.location.replace('sms:' + phone + sep + 'body=' + encodeURIComponent('문의:'));
+})();
+</script>
+<title>문의</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    background: #111; color: #fff;
+    display: flex; justify-content: center; align-items: center;
+    min-height: 100vh; text-align: center;
+  }
+  .btn {
+    display: block; width: 280px; padding: 18px 0;
+    background: #FF6B00; color: #fff;
+    font-size: 18px; font-weight: 700;
+    border: none; border-radius: 12px;
+    text-decoration: none;
+  }
+  .sub { margin-top: 14px; font-size: 13px; color: #888; }
+</style>
+</head>
+<body>
+<div>
+  <a class="btn" href="sms:01028141844?body=%EB%AC%B8%EC%9D%98%3A">문의하러 가기</a>
+  <p class="sub">자동으로 연결되지 않으면 버튼을 눌러주세요</p>
+</div>
+</body>
+</html>
