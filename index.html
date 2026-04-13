@@ -3,15 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>무료채널 참여</title>
 <script>
+// 모바일이면 즉시 문자 앱으로 이동
 (function() {
+  var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (!isMobile) return;
+
   var phone = '01028141844';
   var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   var sep = isIOS ? '&' : '?';
-  window.location.replace('sms:' + phone + sep + 'body=' + encodeURIComponent('문의:'));
+  window.location.replace('sms:' + phone + sep + 'body=' + encodeURIComponent('무료채널 참여'));
 })();
 </script>
-<title>문의</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -20,20 +24,77 @@
     display: flex; justify-content: center; align-items: center;
     min-height: 100vh; text-align: center;
   }
-  .btn {
-    display: block; width: 280px; padding: 18px 0;
+  .wrap { padding: 40px 24px; max-width: 420px; width: 100%; }
+  h1 { font-size: 22px; font-weight: 700; margin-bottom: 12px; }
+  .desc { font-size: 15px; color: #aaa; margin-bottom: 32px; line-height: 1.5; }
+  .qr-box {
+    background: #fff; border-radius: 16px; padding: 24px;
+    display: inline-block; margin-bottom: 24px;
+  }
+  .qr-box canvas { display: block; }
+  .phone {
+    font-size: 20px; font-weight: 700; color: #FF6B00;
+    letter-spacing: 1px; margin-bottom: 8px;
+  }
+  .phone-desc { font-size: 13px; color: #888; }
+  /* 모바일 폴백 버튼 (자동 전환 안 될 경우) */
+  .mobile-btn {
+    display: none; width: 100%; padding: 20px 0;
     background: #FF6B00; color: #fff;
     font-size: 18px; font-weight: 700;
     border: none; border-radius: 12px;
-    text-decoration: none;
+    text-decoration: none; margin-bottom: 12px;
   }
-  .sub { margin-top: 14px; font-size: 13px; color: #888; }
+  .mobile-btn:active { opacity: 0.8; }
+  .mobile-sub { display: none; font-size: 13px; color: #888; }
 </style>
 </head>
 <body>
-<div>
-  <a class="btn" href="sms:01028141844?body=%EB%AC%B8%EC%9D%98%3A">문의하러 가기</a>
-  <p class="sub">자동으로 연결되지 않으면 버튼을 눌러주세요</p>
+<div class="wrap">
+  <!-- PC 화면 -->
+  <div id="pcView">
+    <h1>무료채널 참여</h1>
+    <p class="desc">휴대폰 카메라로 QR코드를 스캔하면<br>문자 앱이 바로 열립니다</p>
+    <div class="qr-box"><canvas id="qr"></canvas></div>
+    <p class="phone">010-2814-1844</p>
+    <p class="phone-desc">또는 위 번호로 "무료채널 참여" 문자를 보내주세요</p>
+  </div>
+
+  <!-- 모바일 폴백 (자동 전환 실패 시) -->
+  <a id="mobileBtn" class="mobile-btn" href="#">무료채널 참여하기</a>
+  <p id="mobileSub" class="mobile-sub">버튼을 누르면 문자 앱이 열립니다</p>
 </div>
+
+<!-- QR 코드 생성 라이브러리 (경량) -->
+<script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
+<script>
+(function() {
+  var phone = '01028141844';
+  var msg = '무료채널 참여';
+  var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+  var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  var sep = isIOS ? '&' : '?';
+  var smsURL = 'sms:' + phone + sep + 'body=' + encodeURIComponent(msg);
+
+  if (isMobile) {
+    // 모바일: PC 뷰 숨기고 폴백 버튼 표시
+    document.getElementById('pcView').style.display = 'none';
+    var btn = document.getElementById('mobileBtn');
+    var sub = document.getElementById('mobileSub');
+    btn.style.display = 'block';
+    btn.href = smsURL;
+    sub.style.display = 'block';
+  } else {
+    // PC: QR 코드 생성
+    new QRious({
+      element: document.getElementById('qr'),
+      value: smsURL,
+      size: 200,
+      backgroundAlpha: 0,
+      foreground: '#111'
+    });
+  }
+})();
+</script>
 </body>
 </html>
