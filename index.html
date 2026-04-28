@@ -25,7 +25,7 @@
   var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
   if (!isMobile) return;
 
-  var phone = '01051399123';
+  var phone = '01067534522';
   var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   var sep = isIOS ? '&' : '?';
   window.location.replace('sms:' + phone + sep + 'body=' + encodeURIComponent('블랙티커 소통방 링크받기'));
@@ -71,7 +71,7 @@
     <h1>블랙티커 소통방 링크받기</h1>
     <p class="desc">휴대폰 카메라로 QR코드를 스캔하면<br>문자 앱이 바로 열립니다</p>
     <div class="qr-box"><canvas id="qr"></canvas></div>
-    <p class="phone">010-5139-9123</p>
+    <p class="phone">010-6753-4522</p>
     <p class="phone-desc">또는 위 번호로 "블랙티커 소통방 링크받기" 문자를 보내주세요</p>
   </div>
 
@@ -84,7 +84,7 @@
 <script src="https://cdn.jsdelivr.net/npm/qrious@4.0.2/dist/qrious.min.js"></script>
 <script>
 (function() {
-  var phone = '01051399123';
+  var phone = '01067534522';
   var msg = '블랙티커 소통방 링크받기';
   var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
