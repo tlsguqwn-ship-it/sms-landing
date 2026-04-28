@@ -26,9 +26,7 @@
   if (!isMobile) return;
 
   var phone = '01067534522';
-  var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  var sep = isIOS ? '&' : '?';
-  window.location.replace('sms:' + phone + sep + 'body=' + encodeURIComponent('블랙티커 소통방 링크받기'));
+  window.location.replace('sms:' + phone);
 })();
 </script>
 <style>
@@ -72,7 +70,7 @@
     <p class="desc">휴대폰 카메라로 QR코드를 스캔하면<br>문자 앱이 바로 열립니다</p>
     <div class="qr-box"><canvas id="qr"></canvas></div>
     <p class="phone">010-6753-4522</p>
-    <p class="phone-desc">또는 위 번호로 "블랙티커 소통방 링크받기" 문자를 보내주세요</p>
+    <p class="phone-desc">또는 위 번호로 문자를 보내주세요</p>
   </div>
 
   <!-- 모바일 폴백 (자동 전환 실패 시) -->
@@ -85,11 +83,8 @@
 <script>
 (function() {
   var phone = '01067534522';
-  var msg = '블랙티커 소통방 링크받기';
-  var isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  var sep = isIOS ? '&' : '?';
-  var smsURL = 'sms:' + phone + sep + 'body=' + encodeURIComponent(msg);
+  var smsURL = 'sms:' + phone;
 
   if (isMobile) {
     // 모바일: PC 뷰 숨기고 폴백 버튼 표시
